@@ -11,10 +11,10 @@ Imports System.Windows
 
 ' Revisar los valores de los atributos del ensamblado
 
-<Assembly: AssemblyTitle("SistemaFacturacion")> 
+<Assembly: AssemblyTitle("ProyectoFacturacion")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("SistemaFacturacion")> 
+<Assembly: AssemblyProduct("ProyectoFacturacion")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016")> 
 <Assembly: AssemblyTrademark("")> 
 <Assembly: ComVisible(false)>
@@ -42,7 +42,7 @@ Imports System.Windows
 
 
 'El siguiente GUID sirve como identificador de typelib si este proyecto se expone a COM
-<Assembly: Guid("7391bf7c-a87f-4e4e-afa6-98f67dc43f5f")> 
+<Assembly: Guid("b501e9c3-2cb0-41b2-aee2-68b8b5cd1202")> 
 
 ' La información de versión de un ensamblado consta de los cuatro valores siguientes:
 '

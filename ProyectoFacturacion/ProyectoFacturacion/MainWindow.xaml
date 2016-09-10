@@ -1,7 +1,7 @@
 ﻿<Window x:Name="frmLogin" x:Class="MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="LOGIN" Height="281.343" Width="341.418">
+   Title="LOGIN" Height="281.343" Width="341.418">
     <Grid>
         <Label x:Name="lblUser" Content="USER :" HorizontalAlignment="Left" Margin="56,61,0,0" VerticalAlignment="Top" Width="77"/>
         <Label x:Name="lblPass" Content="PASS :" HorizontalAlignment="Left" Margin="56,114,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.391,-0.687"/>

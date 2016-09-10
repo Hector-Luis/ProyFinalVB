@@ -1,7 +1,7 @@
 ﻿Imports System.Data
 Imports System.Data.OleDb
 Class MainWindow
-    Private dbPath = "SistemaFacturacion.mdb"
+    Private dbPath = "Facturacion.mdb"
     Public strConexion = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" & dbPath
     Dim dsUsuarios As DataSet
 
