@@ -24,9 +24,16 @@ Class MainWindow
             If txtUser.Text = user(1) Then
                 If pwdPass.Password = user(2) Then
                     MessageBox.Show("BIENVENIDO")
-                    Dim admin As New frmAdmin
-                    admin.Show()
-                    Me.Hide()
+                    Select Case user(5)
+                        Case 1
+                            Dim admin As New frmAdmin
+                            admin.Show()
+                            Me.Hide()
+                        Case 2
+                            Dim prov As New frmProvincia
+                            prov.Show()
+                            Me.Hide()
+                    End Select
                 Else
                     MessageBox.Show("CLAVE INVÁLIDA")
                 End If

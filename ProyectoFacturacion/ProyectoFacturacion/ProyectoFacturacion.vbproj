@@ -74,6 +74,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="frmProvincia.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmVenta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -82,11 +90,18 @@
       <DependentUpon>Application.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Detalle.vb" />
     <Compile Include="frmAdmin.xaml.vb">
       <DependentUpon>frmAdmin.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmProducto.xaml.vb">
       <DependentUpon>frmProducto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmProvincia.xaml.vb">
+      <DependentUpon>frmProvincia.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmVenta.xaml.vb">
+      <DependentUpon>frmVenta.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.vb">
       <DependentUpon>MainWindow.xaml</DependentUpon>
