@@ -5,8 +5,8 @@
     <Grid>
         <Label x:Name="lblUser" Content="USER :" HorizontalAlignment="Left" Margin="56,61,0,0" VerticalAlignment="Top" Width="77"/>
         <Label x:Name="lblPass" Content="PASS :" HorizontalAlignment="Left" Margin="56,114,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.391,-0.687"/>
-        <TextBox x:Name="txtUser" HorizontalAlignment="Left" Height="19" Margin="165,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="103"/>
-        <PasswordBox x:Name="pwdPass" HorizontalAlignment="Left" Margin="165,114,0,0" VerticalAlignment="Top" Width="103"/>
+        <TextBox x:Name="txtUser" HorizontalAlignment="Left" Height="26" Margin="165,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="103"/>
+        <PasswordBox x:Name="pwdPass" HorizontalAlignment="Left" Margin="165,111,0,0" VerticalAlignment="Top" Width="103" Height="26"/>
         <Button x:Name="btnLogin" Content="LOGIN" HorizontalAlignment="Left" Margin="165,176,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnCancel" Content="CANCEL" HorizontalAlignment="Left" Margin="56,176,0,0" VerticalAlignment="Top" Width="75"/>
 

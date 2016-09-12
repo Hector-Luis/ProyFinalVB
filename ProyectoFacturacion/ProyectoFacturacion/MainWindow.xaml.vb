@@ -30,8 +30,8 @@ Class MainWindow
                             admin.Show()
                             Me.Hide()
                         Case 2
-                            Dim prov As New frmProvincia
-                            prov.Show()
+                            Dim dat_fact As New Datos_Factura
+                            dat_fact.Show()
                             Me.Hide()
                     End Select
                 Else
