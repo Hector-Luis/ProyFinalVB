@@ -1,0 +1,13 @@
+﻿<Window x:Name="frmDatosFactura" x:Class="Datos_Factura"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Datos_Factura" Height="210" Width="320">
+    <Grid>
+        <ComboBox x:Name="cbxProvincia" HorizontalAlignment="Left" Margin="136,40,0,0" VerticalAlignment="Top" Width="141"/>
+        <Button x:Name="btnAceptar" Content="ACCEPT" HorizontalAlignment="Left" Margin="202,133,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label x:Name="lblProvincia" Content="Seleccione Provincia:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="121"/>
+        <Label x:Name="lblIdentificacion" Content="(C.I. / RUC) CLIENTE:" HorizontalAlignment="Left" Margin="10,87,0,0" VerticalAlignment="Top" Width="121"/>
+        <TextBox x:Name="txtIdentificacion" HorizontalAlignment="Left" Height="26" Margin="159,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="118"/>
+
+    </Grid>
+</Window>

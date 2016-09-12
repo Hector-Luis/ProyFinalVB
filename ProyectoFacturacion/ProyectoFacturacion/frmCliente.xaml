@@ -1,0 +1,17 @@
+﻿<Window x:Name="frmCliente1" x:Class="frmCliente"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="frmCliente" Height="286.866" Width="334.328">
+    <Grid>
+        <Label x:Name="lblNombre" Content="NOMBRE :" HorizontalAlignment="Left" Margin="41,67,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblIdentificacion" Content="C.I./R.U.C.:" HorizontalAlignment="Left" Margin="42,98,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblTelefono" Content="TELEFONO:" HorizontalAlignment="Left" Margin="36,129,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDireccion" Content="DIRECCION:" HorizontalAlignment="Left" Margin="32,160,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="26" Margin="111,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205"/>
+        <TextBox x:Name="txtIdentificacion" HorizontalAlignment="Left" Height="26" Margin="111,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="91"/>
+        <TextBox x:Name="txtTelefono" HorizontalAlignment="Left" Height="26" Margin="111,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="91"/>
+        <TextBox x:Name="txtDireccion" HorizontalAlignment="Left" Height="26" Margin="111,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205"/>
+        <Button x:Name="btnGuardar" Content="SAVE" HorizontalAlignment="Left" Margin="241,210,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>
