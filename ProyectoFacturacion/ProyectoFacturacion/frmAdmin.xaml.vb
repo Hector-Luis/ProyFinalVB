@@ -38,6 +38,7 @@ Public Class frmAdmin
 
     Private Sub btnNuevoProd_Click(sender As Object, e As RoutedEventArgs) Handles btnNuevoProd.Click
         Dim newProducto = New frmProducto
+        Me.Close()
         newProducto.Show()
     End Sub
 

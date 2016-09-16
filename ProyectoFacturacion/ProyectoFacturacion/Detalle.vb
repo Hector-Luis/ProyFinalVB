@@ -2,7 +2,7 @@
     Private idDetalle As Integer
     Private idFactura As Integer
     Private cantidad As Byte
-    Private producto As String
+    Private producto As Producto
     Private precio_unit As Double
     Private precio_final As Double = 0.0
     Private iva_causado As Double = 0.0
@@ -34,11 +34,11 @@
         End Set
     End Property
 
-    Public Property P_Producto As String
+    Public Property P_Producto As Producto
         Get
             Return producto
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As Producto)
             producto = value
         End Set
     End Property
@@ -70,7 +70,12 @@
     End Sub
 
     Public Sub Calcular_Iva(iva As Integer)
-        iva_causado = precio_final * iva / 100
+        If P_Producto.P_pagoIva Then
+            iva_causado = precio_final * iva / 100
+        Else
+            iva_causado = 0.0
+        End If
+
     End Sub
 
     'Public Sub New(cant As Byte, prod As String, p_unit As Double)

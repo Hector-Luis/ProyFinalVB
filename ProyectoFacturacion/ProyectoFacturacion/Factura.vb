@@ -221,7 +221,7 @@ Public Class Factura
             'Dim idc As Integer = cliente.P_idCliente
             For Each detalle As Detalle In P_detalles
                 sec = sec + 1
-                dsFactura.Tables(0).Rows.Add(sec, detalle.P_Cantidad, detalle.P_Producto, detalle.P_PrecioUnit, detalle.P_PrecioFinal, detalle.P_IvaCausado, Me.P_numero)
+                dsFactura.Tables(0).Rows.Add(sec, detalle.P_Cantidad, detalle.P_Producto.P_nombre, detalle.P_PrecioUnit, detalle.P_PrecioFinal, detalle.P_IvaCausado, Me.P_numero)
             Next
 
 

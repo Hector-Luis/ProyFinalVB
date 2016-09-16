@@ -77,6 +77,7 @@ Public Class Datos_Factura
                 'MessageBox.Show(numFact)
                 Dim venta As frmVenta = New frmVenta(factura)
                 venta.Show()
+                Me.Close()
             End If
         End Using
 
@@ -85,5 +86,10 @@ Public Class Datos_Factura
     Private Sub txtIdentificacion_PreviewTextInput(sender As Object, e As TextCompositionEventArgs) Handles txtIdentificacion.PreviewTextInput
         Dim regex As Regex = New Regex("[^0-9]+")
         e.Handled = regex.IsMatch(e.Text)
+    End Sub
+
+    Private Sub frmDatosFactura_Closing(sender As Object, e As ComponentModel.CancelEventArgs) Handles frmDatosFactura.Closing
+        Dim frmLogin As MainWindow = New MainWindow()
+        frmLogin.Show()
     End Sub
 End Class

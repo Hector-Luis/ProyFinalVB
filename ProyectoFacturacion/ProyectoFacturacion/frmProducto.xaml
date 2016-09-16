@@ -12,11 +12,11 @@
         <Label x:Name="lblCategoria" Content="CATEGORIA" HorizontalAlignment="Left" Height="27" Margin="10,137,0,0" VerticalAlignment="Top" Width="85"/>
         <Label x:Name="lblPrecio" Content="PRECIO" HorizontalAlignment="Left" Height="23" Margin="10,193,0,0" VerticalAlignment="Top" Width="85"/>
         <Label x:Name="lblStock" Content="STOCK" HorizontalAlignment="Left" Height="28" Margin="10,247,0,0" VerticalAlignment="Top" Width="85"/>
-        <TextBox x:Name="txtId" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Margin="112,34,0,0" RenderTransformOrigin="0.775,0.506"/>
+        <TextBox x:Name="txtId" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Margin="112,34,0,0" RenderTransformOrigin="0.775,0.506" IsEnabled="False"/>
         <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" Margin="112,78,0,0"/>
         <TextBox x:Name="txtPrecio" HorizontalAlignment="Left" Height="23" Margin="112,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="68"/>
         <TextBox x:Name="txtStock" HorizontalAlignment="Left" Height="23" Margin="112,249,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41"/>
-        <ComboBox x:Name="cbxCategoria" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="27" Margin="112,137,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="cbxCategoria" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="27" Margin="112,137,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0"/>
         <Button x:Name="btnActualizar" Content="UPDATE" HorizontalAlignment="Left" Height="30" Margin="10,336,0,0" VerticalAlignment="Top" Width="71"/>
         <Button x:Name="btnGuardar" Content="SAVE" HorizontalAlignment="Left" Margin="98,336,0,0" VerticalAlignment="Top" Width="67" Height="30"/>
         <Button x:Name="btnCancelar" Grid.ColumnSpan="2" Content="CANCEL" HorizontalAlignment="Left" Height="30" Margin="180,336,0,0" VerticalAlignment="Top" Width="68"/>

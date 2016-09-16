@@ -71,23 +71,46 @@ Public Class frmVenta
     End Sub
 
     Private Sub btnAgregar_Click(sender As Object, e As RoutedEventArgs) Handles btnAgregar.Click
-        Dim detalle As Detalle
-        detalle = New Detalle()
-        detalle.P_Cantidad = CByte(txtCantidad.Text)
-        detalle.P_Producto = cbxProducto.SelectedItem
-        detalle.P_PrecioUnit = CDbl(txtPrecio.Text)
-        detalle.Calcular_Precio_Final()
-        detalle.Calcular_Iva(factura.P_baseIva)
+        If CInt(txtCantidad.Text) > CInt(txtStock.Text) Then
+            MessageBox.Show("EXCEDE EL STOCK")
+        Else
+            Dim produc As Producto = New Producto()
+            Using dbConexion As New OleDbConnection(strConexion)
+                Dim consulta As String
+                Dim Adapter As New OleDbDataAdapter
+                consulta = "SELECT PRODUCTO.IDPRODUCTO, PRODUCTO.NOMBRE, CATEGORIA.PAGO_IVA FROM PRODUCTO, CATEGORIA WHERE (PRODUCTO.NOMBRE = '" + cbxProducto.SelectedItem + "' AND PRODUCTO.CATEGORIA = CATEGORIA.IDCATEGORIA)"
+                Adapter = New OleDbDataAdapter(New OleDbCommand(consulta, dbConexion))
+                Adapter.Fill(dsVenta, "PROD")
+                For Each prod As DataRow In dsVenta.Tables("PROD").Rows
+                    produc.P_idProducto = prod(0)
+                    produc.P_nombre = prod(1)
+                    If prod(2) = "SI" Then
+                        produc.P_pagoIva = True
+                    Else
+                        produc.P_pagoIva = False
+                    End If
+                Next
 
-        Me.factura.P_detalles.Add(detalle)
-        dsVenta.Tables("DETALLES").Rows.Add(detalle.P_Cantidad, detalle.P_Producto, detalle.P_PrecioUnit, detalle.P_PrecioFinal)
+            End Using
+            Dim detalle As Detalle
+            detalle = New Detalle()
+            detalle.P_Cantidad = CByte(txtCantidad.Text)
+            detalle.P_Producto = produc
+            detalle.P_PrecioUnit = CDbl(txtPrecio.Text)
+            detalle.Calcular_Precio_Final()
+            detalle.Calcular_Iva(factura.P_baseIva)
+
+            Me.factura.P_detalles.Add(detalle)
+            dsVenta.Tables("DETALLES").Rows.Add(detalle.P_Cantidad, detalle.P_Producto.P_nombre, detalle.P_PrecioUnit, detalle.P_PrecioFinal)
 
 
-        Me.factura.Generar_Totales()
-        txtSubtotal.Text = Me.factura.P_subTotal
-        txtIva.Text = Me.factura.P_ivatotal
-        txtDescuento.Text = Me.factura.P_descuento
-        txtTotal.Text = Me.factura.P_total
+            Me.factura.Generar_Totales()
+            txtSubtotal.Text = Me.factura.P_subtotal
+            txtIva.Text = Me.factura.P_ivatotal
+            txtDescuento.Text = Me.factura.P_descuento
+            txtTotal.Text = Me.factura.P_total
+
+        End If
     End Sub
 
     Private Sub cbxTipoPago_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cbxTipoPago.SelectionChanged
@@ -102,6 +125,8 @@ Public Class frmVenta
     Private Sub btnGuardar_Click(sender As Object, e As RoutedEventArgs) Handles btnGuardar.Click
         Me.factura.Guardar()
         Me.Close()
+        Dim frmDatos As Datos_Factura = New Datos_Factura()
+        frmDatos.Show()
     End Sub
 
     Private Sub frmVenta1_Closing(sender As Object, e As ComponentModel.CancelEventArgs) Handles frmVenta1.Closing
