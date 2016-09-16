@@ -1,5 +1,6 @@
 ﻿Public Class Factura
     Private aux_provincia As String
+    Private provincia As String
     Private baseIva As Byte
     Private fecha As Date
     Private cliente As Cliente
@@ -10,6 +11,18 @@
     Private descuento As Double
     Private total As Double
     Private forma_pago As String
+    Private idfactura As Integer
+
+    Public Property P_id() As Integer
+        Get
+            Return Me.idfactura
+        End Get
+        Set(ByVal value As Integer)
+            Me.idfactura = value
+        End Set
+    End Property
+
+
 
     Public Property P_cliente() As Cliente
         Get
@@ -26,6 +39,15 @@
         End Get
         Set(ByVal value As String)
             Me.aux_provincia = value
+        End Set
+    End Property
+
+    Public Property P_Provincia() As String
+        Get
+            Return Me.provincia
+        End Get
+        Set(ByVal value As String)
+            Me.provincia = value
         End Set
     End Property
 
@@ -47,24 +69,41 @@
         End Set
     End Property
 
-    Public ReadOnly Property P_subTotal() As Double
+    Public Property P_subtotal() As Double
         Get
             Return Me.subTotal
         End Get
+        Set(ByVal value As Double)
+            Me.subTotal = value
+        End Set
     End Property
 
-    Public ReadOnly Property P_ivaTotal() As Double
+    Public Property P_ivatotal() As Double
         Get
             Return Me.ivaTotal
         End Get
+        Set(ByVal value As Double)
+            Me.ivaTotal = value
+        End Set
     End Property
 
-    Public ReadOnly Property P_total() As Double
+    Public Property P_descuento() As Double
+        Get
+            Return Me.descuento
+        End Get
+        Set(ByVal value As Double)
+            Me.descuento = value
+        End Set
+    End Property
+
+    Public Property P_total() As Double
         Get
             Return Me.total
         End Get
+        Set(ByVal value As Double)
+            Me.total = value
+        End Set
     End Property
-
     Public Sub CalcularSubTotal()
         For Each detalle As Detalle In Me.P_detalles
             Me.subTotal = Me.subTotal + detalle.P_PrecioFinal
@@ -97,7 +136,7 @@
         detalles.Add(detalle)
     End Sub
 
-   
+
 
     Public Sub Generar_Totales()
         Me.subTotal = 0.0

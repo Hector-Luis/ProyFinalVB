@@ -18,7 +18,13 @@
                         <Button x:Name="btnNuevoProd" Content="NUEVO" HorizontalAlignment="Left" Height="22" Margin="10,291,0,0" VerticalAlignment="Top" Width="82"/>
                     </Grid>
                 </Grid>
-
+            </TabItem>
+            <TabItem Header="FACTURAS">
+                <Grid Background="#FFE9E9E9" Margin="0,0,0,-2">
+                    <Grid x:Name="grdFactura" HorizontalAlignment="Left" Height="328" VerticalAlignment="Top" Width="690" Margin="72,0,0,0" Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}">
+                        <DataGrid x:Name="dtgFactura" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="308" Width="670" ItemsSource="{Binding Path=FACTURA}"/>
+                    </Grid>
+                </Grid>
             </TabItem>
         </TabControl>
 

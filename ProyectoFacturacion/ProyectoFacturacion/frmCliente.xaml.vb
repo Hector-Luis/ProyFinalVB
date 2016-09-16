@@ -49,9 +49,8 @@ Public Class frmCliente
                 MessageBox.Show("ERROR AL AGREGAR")
             End Try
 
-            'MessageBox.Show("CLIENTE AGREGADO")
-            'dsClientes.Tables("CLIENTE").AcceptChanges()
-
         End Using
+
+        Me.Close()
     End Sub
 End Class

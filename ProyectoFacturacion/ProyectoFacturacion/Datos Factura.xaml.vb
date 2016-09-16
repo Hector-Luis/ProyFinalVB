@@ -1,5 +1,7 @@
 ﻿Imports System.Data
 Imports System.Data.OleDb
+Imports System.Text.RegularExpressions
+
 Public Class Datos_Factura
     Private dbPath = "Facturacion.mdb"
     Public strConexion = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" & dbPath
@@ -77,5 +79,10 @@ Public Class Datos_Factura
         'Dim provincia As String = cbxProvincia.SelectedItem
         'Dim frmVenta As frmVenta = New frmVenta(provincia)
         'frmVenta.Show()
+    End Sub
+
+    Private Sub txtIdentificacion_PreviewTextInput(sender As Object, e As TextCompositionEventArgs) Handles txtIdentificacion.PreviewTextInput
+        Dim regex As Regex = New Regex("[^0-9]+")
+        e.Handled = regex.IsMatch(e.Text)
     End Sub
 End Class

@@ -78,6 +78,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="frmFactura.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmProducto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -105,6 +109,9 @@
     </Compile>
     <Compile Include="frmCliente.xaml.vb">
       <DependentUpon>frmCliente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmFactura.xaml.vb">
+      <DependentUpon>frmFactura.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmProducto.xaml.vb">
       <DependentUpon>frmProducto.xaml</DependentUpon>

@@ -4,23 +4,26 @@ Public Class frmVenta
     Private dbPath = "Facturacion.mdb"
     Public strConexion = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" & dbPath
     Private dsVenta As DataSet
+    Private dsDetalles As DataSet
     Private factura As Factura
     Private detalles As DataTable
     Private aux As String
     Public Sub New(provincia As String, aux As String, cliente As Cliente)
         InitializeComponent()
+        lblProvincia.Content = provincia
         dsVenta = New DataSet()
+        'dsDetalles = New DataSet()
         factura = New Factura()
+        detalles = New DataTable()
         Me.aux = aux
         factura.P_cliente = cliente
         'Llenar_Datos()
-        detalles = dsVenta.Tables.Add("DETALLES")
-        lblProvincia.Content = provincia
-        detalles.Columns.Add("CANT.", Type.GetType("System.Byte"))
-        detalles.Columns.Add("PRODUCTO", Type.GetType("System.String"))
-        detalles.Columns.Add("P. UNIT.", Type.GetType("System.Double"))
-        'dsVenta.Tables.Add(detalles)
-        dtgDetalles.DataContext = dsVenta.Tables("DETALLES")
+        'detalles = dsVenta.Tables.Add("DETALLES")
+        'detalles.Columns.Add("CANT.", Type.GetType("System.Byte"))
+        'detalles.Columns.Add("PRODUCTO", Type.GetType("System.String"))
+        'detalles.Columns.Add("P. UNIT.", Type.GetType("System.Double"))
+        ''dsVenta.Tables.Add(detalles)
+        'dtgDetalles.DataContext = dsVenta.Tables("DETALLES")
 
     End Sub
 
@@ -32,8 +35,8 @@ Public Class frmVenta
             Dim Adapter As New OleDbDataAdapter
             consulta = "SELECT * FROM PRODUCTO"
             Adapter = New OleDbDataAdapter(New OleDbCommand(consulta, dbConexion))
-            'Dim dsVenta = New DataSet()
             Adapter.Fill(dsVenta, "PRODUCTO")
+
 
             For Each prod As DataRow In dsVenta.Tables("PRODUCTO").Rows
                 cbxProducto.Items.Add(prod(1))
@@ -48,8 +51,10 @@ Public Class frmVenta
             factura.P_numero = aux & "-001-00000" & sec
             MessageBox.Show(factura.P_numero)
             lblnumero.Content = factura.P_numero
+
         End Using
 
+        Detalles_Factura()
 
     End Sub
 
@@ -62,7 +67,15 @@ Public Class frmVenta
 
     End Sub
 
-
+    Private Sub Detalles_Factura()
+        detalles = New DataTable("DETALLES")
+        detalles.Columns.Add("CANT.", Type.GetType("System.String"))
+        detalles.Columns.Add("PRODUCTO", Type.GetType("System.String"))
+        detalles.Columns.Add("P. UNIT.", Type.GetType("System.Double"))
+        detalles.Columns.Add("P. TOTAL", Type.GetType("System.Double"))
+        dsVenta.Tables.Add(detalles)
+        dtgDetalles.DataContext = dsVenta
+    End Sub
 
     Private Sub cbxProducto_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cbxProducto.SelectionChanged
         'MessageBox.Show("Selecciono: " + cbxProducto.SelectedItem)
@@ -82,11 +95,14 @@ Public Class frmVenta
         detalle.P_PrecioUnit = CDbl(txtPrecio.Text)
         detalle.Calcular_Precio_Final()
         detalle.Calcular_Iva(14)
-        Me.factura.P_Detalles.Add(detalle)
+        Me.factura.P_detalles.Add(detalle)
+        dsVenta.Tables("DETALLES").Rows.Add(CStr(detalle.P_Cantidad), detalle.P_Producto, detalle.P_PrecioUnit, detalle.P_PrecioFinal)
+
 
         Me.factura.Generar_Totales()
         txtSubtotal.Text = Me.factura.P_subTotal
         txtIva.Text = Me.factura.P_ivaTotal
         txtTotal.Text = Me.factura.P_total
     End Sub
+
 End Class

@@ -20,12 +20,18 @@ Public Class frmAdmin
             Adapter = New OleDbDataAdapter(New OleDbCommand(consulta, dbConexion))
             Dim dsProductos = New DataSet()
             Adapter.Fill(dsProductos, "PRODUCTO")
-
-            'For Each prod As DataRow In dsProductos.Tables("PRODUCTO").Rows
-            '    MessageBox.Show(prod(1))
-            'Next
             dtgProducto.DataContext = dsProductos
 
+            'consulta = "SELECT * FROM FACTURA"
+            consulta = "SELECT FACTURA.NUMERO, CLIENTE.NOMBRE as NOMBRE_CLIENTE, FACTURA.FECHA, FACTURA.TOTAL FROM FACTURA, CLIENTE WHERE (FACTURA.IDCLIENTE = CLIENTE.IDCLIENTE)"
+            Adapter = New OleDbDataAdapter(New OleDbCommand(consulta, dbConexion))
+            Dim dsFacturas = New DataSet()
+            Adapter.Fill(dsFacturas, "FACTURA")
+            'MessageBox.Show(dsFacturas.Tables("FACTURA").Rows.Count)
+            'For Each fila As DataRow In dsFacturas.Tables("FACTURA").Rows
+            '    MessageBox.Show(fila(1))
+            'Next
+            dtgFactura.DataContext = dsFacturas
         End Using
 
     End Sub
@@ -33,5 +39,15 @@ Public Class frmAdmin
     Private Sub btnNuevoProd_Click(sender As Object, e As RoutedEventArgs) Handles btnNuevoProd.Click
         Dim newProducto = New frmProducto
         newProducto.Show()
+    End Sub
+
+    Private Sub dtgFactura_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles dtgFactura.SelectionChanged
+        Dim fila As DataRowView = sender.selectedItem
+        If (fila IsNot Nothing) Then
+            Dim factura As New frmFactura(fila(0))
+            factura.Owner = Me
+            factura.Show()
+            Me.Hide()
+        End If
     End Sub
 End Class
