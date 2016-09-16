@@ -43,6 +43,7 @@ Public Class Datos_Factura
             'Dim dsClientes = New DataSet()
             Adapter.Fill(dsDatos, "CLIENTE")
             For Each client As DataRow In dsDatos.Tables("CLIENTE").Rows
+                cliente.P_idCliente = client(0)
                 cliente.P_nombre = client(1)
                 cliente.P_identificacion = client(2)
                 cliente.P_telefono = client(3)
@@ -59,26 +60,26 @@ Public Class Datos_Factura
                 Dim dsProv As DataSet = New DataSet()
                 Adapter.Fill(dsProv, "PROVINCIA")
                 Dim aux As String = ""
+                Dim baseIva As Byte = 0
                 For Each row As DataRow In dsProv.Tables("PROVINCIA").Rows
                     aux = row(2)
+                    baseIva = row(3)
                     'MessageBox.Show(aux)
                 Next
 
-                Dim venta As frmVenta = New frmVenta(cbxProvincia.SelectedItem, aux, cliente)
+                consulta = "SELECT * FROM FACTURA WHERE PROVINCIA = '" + cbxProvincia.SelectedItem + "'"
+                Adapter = New OleDbDataAdapter(New OleDbCommand(consulta, dbConexion))
+                Dim dsCont As DataSet = New DataSet()
+                Adapter.Fill(dsCont, "REGISTRO")
+                Dim sec As Integer = dsCont.Tables("REGISTRO").Rows.Count
+                Dim numFact As String = aux + "-001-00000" + CStr(sec + 1)
+                Dim factura As Factura = New Factura(cbxProvincia.SelectedItem, baseIva, cliente, numFact)
+                'MessageBox.Show(numFact)
+                Dim venta As frmVenta = New frmVenta(factura)
                 venta.Show()
             End If
         End Using
 
-
-        'For Each cliente As DataRow In dsDatos.Tables("CLIENTE").Rows
-        '    If cliente(2) = txtIdentificacion.Text Then
-        '        MessageBox.Show("CLIENTE EXISTENTE")
-        '    End If
-        'Next
-
-        'Dim provincia As String = cbxProvincia.SelectedItem
-        'Dim frmVenta As frmVenta = New frmVenta(provincia)
-        'frmVenta.Show()
     End Sub
 
     Private Sub txtIdentificacion_PreviewTextInput(sender As Object, e As TextCompositionEventArgs) Handles txtIdentificacion.PreviewTextInput

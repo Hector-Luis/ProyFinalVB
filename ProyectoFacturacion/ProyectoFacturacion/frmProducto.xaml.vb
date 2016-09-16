@@ -1,5 +1,7 @@
 ﻿Imports System.Data
 Imports System.Data.OleDb
+Imports System.Text.RegularExpressions
+
 Public Class frmProducto
     Private dbPath = "Facturacion.mdb"
     Public strConexion = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" & dbPath
@@ -21,5 +23,15 @@ Public Class frmProducto
 
 
         End Using
+    End Sub
+
+    Private Sub txtStock_PreviewTextInput(sender As Object, e As TextCompositionEventArgs) Handles txtStock.PreviewTextInput
+        Dim regex As Regex = New Regex("[^0-9]+")
+        e.Handled = regex.IsMatch(e.Text)
+    End Sub
+
+    Private Sub txtPrecio_PreviewTextInput(sender As Object, e As TextCompositionEventArgs) Handles txtPrecio.PreviewTextInput
+        'Dim regex As Regex = New Regex("[^0-9]+")
+        'e.Handled = regex.IsMatch(e.Text)
     End Sub
 End Class

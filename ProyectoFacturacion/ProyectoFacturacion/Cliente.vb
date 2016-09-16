@@ -58,17 +58,5 @@
         Me.P_direccion = ""
     End Sub
 
-    'Public Sub New(identificacion As String)
-    '    Me.P_identificacion = identificacion
-    '    Console.WriteLine("INGRESE LOS DATOS DE CLIENTE")
-    '    Console.Write("NOMBRE   :")
-    '    Me.P_nombre = Console.ReadLine
-    '    Console.Write("TELEFONO :")
-    '    Me.P_telefono = Console.ReadLine
-    '    Console.Write("DIRECCION:")
-    '    Me.P_direccion = Console.ReadLine
-
-    'End Sub
-
 
 End Class

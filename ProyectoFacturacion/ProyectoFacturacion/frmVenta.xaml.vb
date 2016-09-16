@@ -7,23 +7,15 @@ Public Class frmVenta
     Private dsDetalles As DataSet
     Private factura As Factura
     Private detalles As DataTable
-    Private aux As String
-    Public Sub New(provincia As String, aux As String, cliente As Cliente)
+
+    Public Sub New(factura As Factura)
         InitializeComponent()
-        lblProvincia.Content = provincia
+        Me.factura = factura
+        lblProvincia.Content = factura.P_Provincia
+        lblIva.Content = "IVA " & factura.P_baseIva & ":"
+        Me.factura.P_formaPago = cbxTipoPago.SelectedItem
         dsVenta = New DataSet()
-        'dsDetalles = New DataSet()
-        factura = New Factura()
         detalles = New DataTable()
-        Me.aux = aux
-        factura.P_cliente = cliente
-        'Llenar_Datos()
-        'detalles = dsVenta.Tables.Add("DETALLES")
-        'detalles.Columns.Add("CANT.", Type.GetType("System.Byte"))
-        'detalles.Columns.Add("PRODUCTO", Type.GetType("System.String"))
-        'detalles.Columns.Add("P. UNIT.", Type.GetType("System.Double"))
-        ''dsVenta.Tables.Add(detalles)
-        'dtgDetalles.DataContext = dsVenta.Tables("DETALLES")
 
     End Sub
 
@@ -36,21 +28,16 @@ Public Class frmVenta
             consulta = "SELECT * FROM PRODUCTO"
             Adapter = New OleDbDataAdapter(New OleDbCommand(consulta, dbConexion))
             Adapter.Fill(dsVenta, "PRODUCTO")
-
-
             For Each prod As DataRow In dsVenta.Tables("PRODUCTO").Rows
                 cbxProducto.Items.Add(prod(1))
             Next
-            Dim sec As Integer = 1
-            consulta = "SELECT * FROM FACTURA WHERE PROVINCIA = '" + lblProvincia.Content + "'"
+
+            consulta = "SELECT * FROM TIPO_PAGO"
             Adapter = New OleDbDataAdapter(New OleDbCommand(consulta, dbConexion))
-            Dim dsRegistros = New DataSet()
-            Adapter.Fill(dsRegistros, "FACTURA")
-            MessageBox.Show(dsRegistros.Tables("FACTURA").Rows.Count)
-            sec = dsRegistros.Tables("FACTURA").Rows.Count + 1
-            factura.P_numero = aux & "-001-00000" & sec
-            MessageBox.Show(factura.P_numero)
-            lblnumero.Content = factura.P_numero
+            Adapter.Fill(dsVenta, "TIPO_PAGO")
+            For Each tipo As DataRow In dsVenta.Tables("TIPO_PAGO").Rows
+                cbxTipoPago.Items.Add(tipo(1))
+            Next
 
         End Using
 
@@ -71,20 +58,16 @@ Public Class frmVenta
         detalles = New DataTable("DETALLES")
         detalles.Columns.Add("CANT.", Type.GetType("System.String"))
         detalles.Columns.Add("PRODUCTO", Type.GetType("System.String"))
-        detalles.Columns.Add("P. UNIT.", Type.GetType("System.Double"))
-        detalles.Columns.Add("P. TOTAL", Type.GetType("System.Double"))
+        detalles.Columns.Add("P. UNIT.", Type.GetType("System.String"))
+        detalles.Columns.Add("P. TOTAL", Type.GetType("System.String"))
         dsVenta.Tables.Add(detalles)
         dtgDetalles.DataContext = dsVenta
     End Sub
 
     Private Sub cbxProducto_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cbxProducto.SelectionChanged
-        'MessageBox.Show("Selecciono: " + cbxProducto.SelectedItem)
         Dim dataProd As DataRow = dsVenta.Tables("PRODUCTO").Rows(cbxProducto.SelectedIndex)
         txtPrecio.Text = dataProd(3)
         txtStock.Text = dataProd(4)
-        'For Each prod As DataRow In dsVenta.Tables("PRODUCTO").Rows
-        '    cbxProducto.Items.Add(prod(1))
-        'Next
     End Sub
 
     Private Sub btnAgregar_Click(sender As Object, e As RoutedEventArgs) Handles btnAgregar.Click
@@ -94,15 +77,35 @@ Public Class frmVenta
         detalle.P_Producto = cbxProducto.SelectedItem
         detalle.P_PrecioUnit = CDbl(txtPrecio.Text)
         detalle.Calcular_Precio_Final()
-        detalle.Calcular_Iva(14)
+        detalle.Calcular_Iva(factura.P_baseIva)
+
         Me.factura.P_detalles.Add(detalle)
-        dsVenta.Tables("DETALLES").Rows.Add(CStr(detalle.P_Cantidad), detalle.P_Producto, detalle.P_PrecioUnit, detalle.P_PrecioFinal)
+        dsVenta.Tables("DETALLES").Rows.Add(detalle.P_Cantidad, detalle.P_Producto, detalle.P_PrecioUnit, detalle.P_PrecioFinal)
 
 
         Me.factura.Generar_Totales()
         txtSubtotal.Text = Me.factura.P_subTotal
-        txtIva.Text = Me.factura.P_ivaTotal
+        txtIva.Text = Me.factura.P_ivatotal
+        txtDescuento.Text = Me.factura.P_descuento
         txtTotal.Text = Me.factura.P_total
     End Sub
 
+    Private Sub cbxTipoPago_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cbxTipoPago.SelectionChanged
+        Me.factura.P_formaPago = cbxTipoPago.SelectedItem
+        factura.Generar_Totales()
+        txtSubtotal.Text = Me.factura.P_subtotal
+        txtIva.Text = Me.factura.P_ivatotal
+        txtDescuento.Text = Me.factura.P_descuento
+        txtTotal.Text = Me.factura.P_total
+    End Sub
+
+    Private Sub btnGuardar_Click(sender As Object, e As RoutedEventArgs) Handles btnGuardar.Click
+        Me.factura.Guardar()
+        Me.Close()
+    End Sub
+
+    Private Sub frmVenta1_Closing(sender As Object, e As ComponentModel.CancelEventArgs) Handles frmVenta1.Closing
+        Dim frmLogin As MainWindow = New MainWindow()
+        frmLogin.Show()
+    End Sub
 End Class

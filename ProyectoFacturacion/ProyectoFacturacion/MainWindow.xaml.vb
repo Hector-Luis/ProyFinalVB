@@ -40,4 +40,8 @@ Class MainWindow
             End If
         Next
     End Sub
+
+    Private Sub frmLogin_Closing(sender As Object, e As ComponentModel.CancelEventArgs) Handles frmLogin.Closing
+
+    End Sub
 End Class

@@ -5,25 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProyectoFacturacion"
         mc:Ignorable="d"
-        Title="FACTURA" Height="696.216" Width="456.164">
-    <Grid>
-        <Label x:Name="label" Content="CLIENTE  :" HorizontalAlignment="Left" Margin="22,86,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Content="C.I./R.U.C.:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,112,0,0"/>
-        <DataGrid x:Name="dtgDetalles" HorizontalAlignment="Left" Height="163" Margin="34,172,0,0" VerticalAlignment="Top" Width="385" ItemsSource="{Binding Path=DETALLE}"/>
-        <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="26" Margin="90,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201"/>
-        <TextBox x:Name="txtIdentificacion" HorizontalAlignment="Left" Height="26" Margin="90,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="107"/>
-        <Label x:Name="label2" Content="SUBTOTAL:" HorizontalAlignment="Left" Margin="259,363,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label3" Content="IVA:" HorizontalAlignment="Left" Margin="296,399,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label4" Content="DCTO:" HorizontalAlignment="Left" Margin="283,430,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label5" Content="TOTAL:" HorizontalAlignment="Left" Margin="283,457,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtIva" HorizontalAlignment="Left" Height="26
-                 " Margin="358,399,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61"/>
-        <TextBox x:Name="txtDescuento" HorizontalAlignment="Left" Height="26
-                 " Margin="358,431,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61"/>
-        <TextBox x:Name="txtTotal" HorizontalAlignment="Left" Height="26
-                 " Margin="358,461,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61"/>
-        <Button x:Name="btnEditar" Content="EDITAR" HorizontalAlignment="Left" Margin="34,553,0,0" VerticalAlignment="Top" Width="91"/>
-        <TextBox x:Name="txtSubtotal" HorizontalAlignment="Left" Height="26" Margin="358,361,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61"/>
+        Title="FACTURA" Height="664.216" Width="376.164" Background="White">
+    <Grid x:Name="grdFactura" Margin="0,0,2,4" HorizontalAlignment="Right" Width="360">
 
+        <Grid x:Name="grdContenido" HorizontalAlignment="Left" Height="516" VerticalAlignment="Top" Width="360">
+            <Label x:Name="label" Content="CLIENTE  :" HorizontalAlignment="Left" Margin="16,72,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label1" Content="C.I./R.U.C.:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,98,0,0"/>
+            <DataGrid x:Name="dtgDetalles" HorizontalAlignment="Left" Height="163" Margin="12,172,0,0" VerticalAlignment="Top" Width="329" ItemsSource="{Binding Path=DETALLE}" IsEnabled="False" GridLinesVisibility="None" FrozenColumnCount="4"/>
+            <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="26" Margin="84,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201"/>
+            <TextBox x:Name="txtIdentificacion" HorizontalAlignment="Left" Height="26" Margin="84,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="107"/>
+            <Label x:Name="label2" Content="SUBTOTAL:" HorizontalAlignment="Left" Margin="181,363,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label3" Content="IVA:" HorizontalAlignment="Left" Margin="218,399,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label4" Content="DCTO:" HorizontalAlignment="Left" Margin="205,430,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label5" Content="TOTAL:" HorizontalAlignment="Left" Margin="205,457,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtIva" HorizontalAlignment="Left" Height="26
+                 " Margin="280,399,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61"/>
+            <TextBox x:Name="txtDescuento" HorizontalAlignment="Left" Height="26
+                 " Margin="280,431,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61"/>
+            <TextBox x:Name="txtTotal" HorizontalAlignment="Left" Height="26
+                 " Margin="280,461,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61"/>
+            <TextBox x:Name="txtSubtotal" HorizontalAlignment="Left" Height="26" Margin="280,361,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61"/>
+        </Grid>
+        <Grid x:Name="grdFunciones" HorizontalAlignment="Left" Height="99" Margin="10,521,0,0" VerticalAlignment="Top" Width="340">
+            <Button x:Name="btn_Imprimir" Content="PRINT" HorizontalAlignment="Left" Margin="28,39,0,0" VerticalAlignment="Top" Width="75"/>
+        </Grid>
     </Grid>
+    
+    
 </Window>
